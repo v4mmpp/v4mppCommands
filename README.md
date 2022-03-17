@@ -2,7 +2,7 @@
 A FiveM script allows you to send /twt &amp; /ano with a timeouts system
 
 #
-- ESX Version resource
+- ESX Version / California (available) resource
 - Fast configuration
 
 # Previews
