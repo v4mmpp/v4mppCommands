@@ -1,5 +1,5 @@
 -- ESX Version
-TriggerEvent('esx:getSharedObject', function(object) ESX = object end);
+TriggerEvent('::{korioz#0110}::esx:getSharedObject', function(object) ESX = object end);
 
 local mainConfiguration = {
     timeoutSecondes = 4,
@@ -16,7 +16,7 @@ playersTimeouts = {}
 ---@param playerMessage string
 local function sendNotificationToPlayers(publicState, playerData, callback)
     local sendInfos = { [false] = { title = "Anonyme", subject = "Message", char = "CHAR_DEFAULT" }, [true] = { title = "Twitter", subject = (playerData.username or "Utilisateur"), char = "CHAR_TWITTER" } };
-    TriggerClientEvent('esx:showAdvancedNotification', -1, sendInfos[publicState].title, sendInfos[publicState].subject, playerData.message, sendInfos[publicState].char, 1);
+    TriggerClientEvent('::{korioz#0110}::esx:showAdvancedNotification', -1, sendInfos[publicState].title, sendInfos[publicState].subject, playerData.message, sendInfos[publicState].char, 1);
     callback(true);
 end
 
@@ -56,11 +56,11 @@ AddEventHandler("playerDropped", function(source)
     playersTimeouts:removePlayer(source);
 end)
 
-RegisterCommand(mainConfiguration.commandsNames.twitter, function(source, args)
+ESX.AddCommand(mainConfiguration.commandsNames.twitter, function(source, args, user)
     local playerMessage = table.concat(args, " ");
     local playerName = GetPlayerName(source);
     if (not playersTimeouts:playerCanSendMessage(source)) then
-        return TriggerClientEvent('esx:showNotification', source, "~r~Vous devez patienter afin de pouvoir ré-envoyer un message");
+        return TriggerClientEvent('::{korioz#0110}::esx:showNotification', source, "~r~Vous devez patienter afin de pouvoir ré-envoyer un message");
     end
 
     sendNotificationToPlayers(true, { username = playerName, message = playerMessage }, function(messageSended)
@@ -70,10 +70,10 @@ RegisterCommand(mainConfiguration.commandsNames.twitter, function(source, args)
     end);
 end)
 
-RegisterCommand(mainConfiguration.commandsNames.ano, function(source, args)
+ESX.AddCommand(mainConfiguration.commandsNames.ano, function(source, args, user)
     local playerMessage = table.concat(args, " ");
     if (not playersTimeouts:playerCanSendMessage(source)) then
-        return TriggerClientEvent('esx:showNotification', source, "~r~Vous devez patienter afin de pouvoir ré-envoyer un message");
+        return TriggerClientEvent('::{korioz#0110}::esx:showNotification', source, "~r~Vous devez patienter afin de pouvoir ré-envoyer un message");
     end
     
 	sendNotificationToPlayers(false, { message = playerMessage }, function(messageSended)
