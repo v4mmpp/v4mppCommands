@@ -1,4 +1,4 @@
--- ESX Version
+-- California Version
 TriggerEvent('::{korioz#0110}::esx:getSharedObject', function(object) ESX = object end);
 
 local mainConfiguration = {
