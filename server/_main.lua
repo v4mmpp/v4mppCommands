@@ -1,6 +1,3 @@
--- ESX Version
-TriggerEvent('esx:getSharedObject', function(object) ESX = object end);
-
 ---config
 local mainConfiguration = {
     timeoutSecondes = 4,
